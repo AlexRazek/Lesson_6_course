@@ -10,7 +10,7 @@ User = get_user_model()
 class UserRegistrationSerializer(BaseUserRegistrationSerializer):
     class Meta(BaseUserRegistrationSerializer.Meta):
         model = User
-        # fields = '__all__'
+        fields = '__all__'
         # ('first_name', 'last_name', 'phone',)
 
 

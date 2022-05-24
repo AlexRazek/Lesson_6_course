@@ -1,9 +1,11 @@
 from django.contrib.auth.models import AbstractBaseUser, AbstractUser
 from django.db import models
-from users.managers import UserManager
+# from users.managers import UserManager
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser
+from skymarket.users.managers import UserManager
+
 
 class UserRoles:
     # TODO закончите enum-класс для пользователя
@@ -17,13 +19,14 @@ class User(AbstractBaseUser):
         ("user", "Пользователь"),
         ("admin", "Администратор"),
     ]
+
     first_name = models.CharField(max_length=20, null=True, blank=True, verbose_name="Имя пользователя")
     last_name = models.CharField(max_length=25, null=True, blank=True, verbose_name="Фамилия пользователя")
     phone = PhoneNumberField(verbose_name="Телефон пользователя", null=True)
-    # phone = models.CharField(max_length=15, null=True)
-    email = models.EmailField(max_length=120, unique=True, null=True, verbose_name="Эл.адрес пользователя")
+    email = models.EmailField(max_length=120, unique=True, null=True, verbose_name="Электронный адрес пользователя")
     role = models.CharField(max_length=10, choices=ROLES, default="user", verbose_name="Роль пользователя")
-    is_active = models.BooleanField(verbose_name="Аккаунт активен", default=True)
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
 
     # эта константа определяет поле для логина пользователя
     USERNAME_FIELD = 'email'
@@ -49,6 +52,9 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return self.is_admin
+
+    def is_active(self):
+        return self.is_active
 
     # также для работы модели пользователя должен быть переопределен
     # менеджер объектов
