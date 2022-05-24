@@ -38,14 +38,17 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
+    "djoser",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
     "rest_framework",
     "users",
     "ads",
     "redoc",
+    "drf_spectacular",
 ]
 
 
@@ -82,9 +85,22 @@ WSGI_APPLICATION = "skymarket.wsgi.application"
 
 # TODO здесь мы настраиваем аутентификацию и пагинацию
 REST_FRAMEWORK = {
+    # OTHER REST FRAMEWORK SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 # TODO здесь мы настраиваем Djoser
 DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'users.serializers.UserRegistrationSerializer'
+    },
+    'LOGIN_FIELD': 'email'
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Skymarket API',
+    'DESCRIPTION': 'Awesome skymarket project',
+    'VERSION': '1.0.0',
+    # 'SERVE_INCLUDE_SCHEMA': False,
 }
 
 # Database
@@ -101,6 +117,8 @@ DATABASES = {
         "PASSWORD": os.environ.get("DB_PASSWORD", "skymarket"),
     },
 }
+
+AUTH_USER_MODEL = 'users.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -153,7 +171,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Include Email Backend
 # TODO эти переменные мы добавили чтобы помочь Вам настроить почтовый ящик на django.
-# TODO теперь Вам необходимо создать файл .env на основе .env.example
+# TODO теперь Вам необходимо создать файл .env на основе .env
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = True
 EMAIL_HOST = os.environ.get("EMAIL_HOST", "smtp.gmail.com")
