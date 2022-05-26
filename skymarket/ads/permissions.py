@@ -1,7 +1,7 @@
 from rest_framework import permissions
 from django.http import Http404
-from skymarket.ads.models import Comment, Ad
-from skymarket.users.models import User
+from ads.models import Comment, Ad
+from users.models import User
 
 
 class CommentUpdatePermission(permissions.BasePermission):

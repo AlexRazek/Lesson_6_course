@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from skymarket.ads.models import Ad, Comment
+from ads.models import Ad, Comment
 
 
 class NotAddValidator:

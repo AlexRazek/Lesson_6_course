@@ -4,7 +4,7 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser
-from skymarket.users.managers import UserManager
+from users.managers import UserManager
 
 
 class UserRoles:

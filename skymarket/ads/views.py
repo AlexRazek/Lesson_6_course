@@ -2,19 +2,20 @@ from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import UpdateView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework import pagination, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import ListAPIView, RetrieveAPIView, UpdateAPIView, CreateAPIView, DestroyAPIView
 from django.core.exceptions import ValidationError
 
 
-from skymarket.ads.models import Ad, Comment
-from skymarket.ads.permissions import AdUpdatePermission, CommentUpdatePermission
-from skymarket.ads.serializers import AdDetailSerializer, AdDeleteSerializer, AdSerializer, CommentSerializer, \
-    CommentDetailSerializer, CommentListSerializer
+from ads.models import Ad, Comment
+from ads.permissions import AdUpdatePermission, CommentUpdatePermission
+from ads.serializers import AdDetailSerializer, AdDeleteSerializer, AdSerializer, CommentSerializer, CommentDetailSerializer, CommentListSerializer
 
 
-class AdPagination(pagination.PageNumberPagination):
+
+class AdPagination(PageNumberPagination):
     page_size = 4
 
 
@@ -60,7 +61,7 @@ class CommentListView(ListAPIView):
     serializer_class = CommentListSerializer
 
     def get(self, request, *args, **kwargs):
-        selection_name = request.GET.get("name", None)
+        selection_name = request.GET.get("author", None)
         if selection_name:
             self.queryset = self.queryset.filter(
                 name__contains=selection_name

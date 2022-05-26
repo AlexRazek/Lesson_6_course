@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
-import rest_framework_simplejwt.authentication
+#import rest_framework_simplejwt.authentication
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -88,7 +88,7 @@ REST_FRAMEWORK = {
     # OTHER REST FRAMEWORK SETTINGS
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES.': 'rest_framework_simplejwt.authentication.JWTAuthentication',
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework_pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100
 }
 # TODO здесь мы настраиваем Djoser
