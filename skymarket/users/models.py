@@ -24,7 +24,7 @@ class User(AbstractBaseUser):
     last_name = models.CharField(max_length=25, null=True, blank=True, verbose_name="Фамилия пользователя")
     phone = PhoneNumberField(verbose_name="Телефон пользователя", null=True)
     email = models.EmailField(max_length=120, unique=True, null=True, verbose_name="Электронный адрес пользователя")
-    role = models.CharField(max_length=10, choices=ROLES, default="user", verbose_name="Роль пользователя")
+    role = models.CharField(max_length=10, choices=ROLES, default="user")
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 

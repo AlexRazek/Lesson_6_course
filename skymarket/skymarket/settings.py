@@ -87,9 +87,13 @@ WSGI_APPLICATION = "skymarket.wsgi.application"
 REST_FRAMEWORK = {
     # OTHER REST FRAMEWORK SETTINGS
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'DEFAULT_AUTHENTICATION_CLASSES.': 'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # 'DEFAULT_AUTHENTICATION_CLASSES.': 'rest_framework_simplejwt.authentication.JWTAuthentication',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 100
+    'PAGE_SIZE': 100,
+    'DATE_INPUT_FORMATS': [
+        '%d.%m.%Y',  # '25.10.2021'
+        '%d.%m.%y',  # '25.10.21'
+    ],
 }
 # TODO здесь мы настраиваем Djoser
 DJOSER = {
@@ -114,11 +118,11 @@ SPECTACULAR_SETTINGS = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "HOST": os.environ.get("DB_HOST", "localhost"),
-        "NAME": os.environ.get("POSTGRES_NAME", "skymarket"),
-        "PORT": os.environ.get("DB_PORT", "5432"),
-        "USER": os.environ.get("DB_USER", "skymarket"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", "skymarket"),
+        "HOST": os.environ.get("DB_HOST"),
+        "NAME": os.environ.get("POSTGRES_NAME"),
+        "PORT": os.environ.get("DB_PORT"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
     },
 }
 
