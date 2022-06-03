@@ -33,7 +33,7 @@ class User(AbstractBaseUser):
 
     # эта константа содержит список с полями,
     # которые необходимо заполнить при создании пользователя
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone', 'role']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone']
 
     # для корректной работы нам также необходимо
     # переопределить менеджер модели пользователя

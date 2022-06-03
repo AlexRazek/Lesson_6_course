@@ -26,7 +26,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, email, first_name, last_name, phone, password=None):
+    def create_superuser(self, email, first_name, last_name, phone, password=None,):
         """
         функция для создания суперпользователя — с ее помощью мы создаем админинстратора
         это можно сделать с помощью команды createsuperuser
@@ -38,10 +38,9 @@ class UserManager(BaseUserManager):
             last_name=last_name,
             phone=phone,
             password=password,
-            role="admin",
         )
         user.role = "admin"
-        user.is_admin = True
+        # user.is_admin = True
         user.save(using=self._db)
 
         return user
